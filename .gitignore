@@ -1,3 +1,6 @@
 /.idea/
 /node_modules
 /01_cli_interactive_sort/.idea/
+/02_cli_primitive_db/node_modules/
+/02_cli_primitive_db/.idea/
+/02_cli_primitive_db/db.txt
