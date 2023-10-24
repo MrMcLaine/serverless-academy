@@ -8,9 +8,6 @@ const BOT_TOKEN_TG = process.env.BOT_TOKEN_TG;
 const CHAT_ID_TG = process.env.CHAT_ID_TG;
 
 function initProgram() {
-    console.log('Starting Telegram bot...');
-    console.log('BOT_TOKEN_TG:', BOT_TOKEN_TG);
-    console.log('CHAT_ID_TG:', CHAT_ID_TG);
     const bot = new TelegramBot(BOT_TOKEN_TG, {polling: true});
 
     const app = new Command();

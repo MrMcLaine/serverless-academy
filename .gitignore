@@ -7,3 +7,6 @@
 /03_cli_telegram_console_sender/node_modules/
 /03_cli_telegram_console_sender/.idea/
 /03_cli_telegram_console_sender/.env
+/04_telegram_bot_weather_forecast/node_modules/
+/04_telegram_bot_weather_forecast/.idea/
+/04_telegram_bot_weather_forecast/.env
