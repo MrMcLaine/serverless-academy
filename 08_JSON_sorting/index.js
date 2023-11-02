@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const endpoints = Array.from({ length: 22 }, (_, i) => `http://localhost:4000/json-${i + 1}`);
+const endpoints = Array.from(
+    { length: 22 },
+    (_, i) => `http://localhost:4000/json-${i + 1}`
+);
 
 async function findIsDoneInJson(json) {
     if (json.hasOwnProperty('isDone')) {
@@ -21,7 +24,7 @@ async function requestData(url) {
             return findIsDoneInJson(response.data);
         } catch (error) {
             if (attempt === 2) {
-                console.error(`[Fail] ${url}: ${error.message}`);
+                console.error(`[Fail] ${url}: The endpoint is unavailable`);
                 return null;
             }
         }
@@ -40,7 +43,9 @@ async function processEndpoints() {
         }
     }
 
-    console.log(`\nFound True values: ${trueCount},\nFound False values: ${falseCount}`);
+    console.log(
+        `\nFound True values: ${trueCount},\nFound False values: ${falseCount}`
+    );
 }
 
 processEndpoints();
