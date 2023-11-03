@@ -15,7 +15,7 @@ const login = async (req: Request, res: Response) => {
     try {
         const result = await UserService.login(req.body);
         if (!result.success) {
-            res.status(401).send(result);
+            res.status(404).send(result);
         } else {
             res.status(200).send(result);
         }
