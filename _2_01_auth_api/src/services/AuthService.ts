@@ -2,11 +2,11 @@ import jwt from 'jsonwebtoken';
 
 interface Payload {
     email: string;
-    code?: string;
+    code?: number;
 }
 
 class AuthService {
-    generateToken(data: Payload): string {
+    generateAccessToken(data: Payload): string {
         const payload = {
             email: data.email
         };

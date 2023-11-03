@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import UserService from '../services/userService';
-import {errorHandler} from "../handlers/errorHandler";
+import { errorHandler } from "../handlers/errorHandler";
 
 const register = async (req: Request, res: Response) => {
     try {

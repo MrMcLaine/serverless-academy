@@ -1,6 +1,8 @@
 import pool from '../db';
 import { comparePassword, hashPassword } from "../utils/hashUtils";
 import { SQL_QUERIES } from "../constants";
+import { generateRandomCode } from "../utils/generateRandomCode";
+import { authService } from "./AuthService";
 
 
 const register = async (userData: { email: string; password: string }) => {
@@ -12,10 +14,25 @@ const register = async (userData: { email: string; password: string }) => {
         }
 
         const hashedPassword = await hashPassword(userData.password);
+        const refreshTokenCode = generateRandomCode(5);
 
-        const newUser = await client.query(SQL_QUERIES.INSERT_NEW_USER, [userData.email, hashedPassword]);
+        const newUser = await client.query(SQL_QUERIES.INSERT_NEW_USER, [userData.email, hashedPassword, refreshTokenCode]);
 
-        return { success: true, data: newUser.rows[0] };
+        if (!newUser) {
+            return { success: false, message: 'Failed to create user.' };
+        }
+
+        const accessToken = authService.generateAccessToken({ email: userData.email });
+        const refreshToken = authService.generateRefreshToken({ email: userData.email, code: refreshTokenCode });
+
+        return {
+            success: true,
+            data: {
+                id: newUser.rows[0].id,
+                accessToken: accessToken,
+                refreshToken: refreshToken
+            }
+        };
     } catch (error) {
         throw error;
     } finally {
