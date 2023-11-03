@@ -1,12 +1,11 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import usersRoutes from './routes/userRouter';
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
-});
+app.use('/auth', usersRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

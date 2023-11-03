@@ -1,16 +1,13 @@
-version: '3.8'
+version: '3.6'
 services:
-  postgres:
-    image: postgres
+  db:
+    restart: always
+    image: postgres:15.2
     environment:
-      POSTGRES_USER: 'User'
-      POSTGRES_PASSWORD: ''
-      POSTGRES_DB: 'sls_db'
-      POSTGRES_HOST_AUTH_METHOD: 'trust'
-    ports:
-      - '5432:5432'
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
+      - ./src/migrations:/docker-entrypoint-initdb.d
+    ports:
+      - 5433:5432
