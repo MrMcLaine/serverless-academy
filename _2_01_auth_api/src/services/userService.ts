@@ -3,10 +3,12 @@ import { comparePassword, hashPassword } from '../utils/hashUtils';
 import { SQL_QUERIES } from '../constants';
 import { generateRandomCode } from '../utils/generateRandomCode';
 import { authService } from './AuthService';
+import { validateUser } from "../validations/userValidation";
 
 const register = async (userData: { email: string; password: string }) => {
     const client = await pool.connect();
     try {
+        await validateUser(userData);
         const { rows } = await client.query(SQL_QUERIES.FIND_USER_BY_EMAIL, [
             userData.email,
         ]);
@@ -53,6 +55,7 @@ const register = async (userData: { email: string; password: string }) => {
 const login = async (userData: { email: string; password: string }) => {
     const client = await pool.connect();
     try {
+        await validateUser(userData);
         const { rows } = await client.query(SQL_QUERIES.FIND_USER_BY_EMAIL, [
             userData.email,
         ]);
