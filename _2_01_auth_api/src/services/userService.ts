@@ -1,5 +1,5 @@
 import pool from '../db';
-import bcrypt from 'bcrypt';
+import { comparePassword, hashPassword } from "../../utils/hashUtils";
 
 const register = async (userData: { email: string; password: string }) => {
     const client = await pool.connect();
@@ -9,7 +9,7 @@ const register = async (userData: { email: string; password: string }) => {
             return { success: false, message: 'User already exists.' };
         }
 
-        const hashedPassword = await bcrypt.hash(userData.password, 10);
+        const hashedPassword = await hashPassword(userData.password);
 
         const newUser = await client.query(
             'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id, email',
@@ -34,7 +34,7 @@ const login = async (userData: { email: string; password: string }) => {
             return { success: false, message: 'User does not exist.' };
         }
 
-        const isValid = await bcrypt.compare(userData.password, user.password);
+        const isValid = await comparePassword(userData.password, user.password);
         if (!isValid) {
             return { success: false, message: 'Invalid password.' };
         }
