@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
 import UserService from '../services/userService';
+import {errorHandler} from "../handlers/errorHandler";
 
 const register = async (req: Request, res: Response) => {
     try {
         const result = await UserService.register(req.body);
         res.status(201).send(result);
     } catch (error) {
-        res.status(500).send({ success: false, message: error.message });
+        errorHandler(res, error);
     }
 };
 
@@ -19,7 +20,7 @@ const login = async (req: Request, res: Response) => {
             res.status(200).send(result);
         }
     } catch (error) {
-        res.status(500).send({ success: false, message: error.message });
+        errorHandler(res, error);
     }
 };
 
