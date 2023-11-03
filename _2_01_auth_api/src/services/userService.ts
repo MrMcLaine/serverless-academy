@@ -90,7 +90,35 @@ const login = async (userData: { email: string; password: string }) => {
     }
 };
 
+const getCurrentUser = async (email: string)  => {
+    const client = await pool.connect();
+    try {
+        const { rows } = await client.query(SQL_QUERIES.FIND_USER_BY_EMAIL, [email]);
+
+        if (rows.length === 0) {
+            return { success: false, message: 'User not found.' };
+        }
+
+        const user = rows[0];
+
+        return {
+            success: true,
+            data: {
+                id: user.id,
+                email: user.email
+            }
+        }
+
+    } catch (error) {
+        throw error;
+    } finally {
+        client.release();
+    }
+
+}
+
 export default {
     register,
     login,
+    getCurrentUser
 };

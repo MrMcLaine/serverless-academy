@@ -22,6 +22,15 @@ class AuthService {
 
         return jwt.sign(payload, process.env.JWT_SECRET!);
     }
+
+    verifyAccessToken(token: string): Payload | null {
+        try {
+
+            return jwt.verify(token, process.env.JWT_SECRET!) as Payload;
+        } catch (error) {
+            return null;
+        }
+    }
 }
 
 export const authService = new AuthService();
