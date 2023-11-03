@@ -13,7 +13,9 @@ const register = async (userData: { email: string; password: string }) => {
             userData.email,
         ]);
         if (rows.length) {
-            return { success: false, message: 'User already exists.' };
+            const error = new Error('User already exists.') as Error & { statusCode: number };
+            error.statusCode = 409;
+            throw error;
         }
 
         const hashedPassword = await hashPassword(userData.password);
