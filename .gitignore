@@ -22,3 +22,4 @@
 /_2_01_auth_api/.env
 /_2_01_auth_api/dist/
 /_2_02_find_user_country_by_ip/node_modules/
+/_2_02_find_user_country_by_ip/dist/
