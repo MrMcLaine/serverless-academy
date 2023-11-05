@@ -26,3 +26,6 @@
 /_2_03_json_storage/node_modules/
 /_2_03_json_storage/dist/
 _2_03_json_storage/.env
+/_2_04_shortlinker_api/node_modules/
+/_2_04_shortlinker_api/.env
+/_2_04_shortlinker_api/dist/
