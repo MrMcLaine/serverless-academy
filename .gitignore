@@ -25,3 +25,4 @@
 /_2_02_find_user_country_by_ip/dist/
 /_2_03_json_storage/node_modules/
 /_2_03_json_storage/dist/
+_2_03_json_storage/.env
