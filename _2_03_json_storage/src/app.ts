@@ -1,8 +1,10 @@
 import express from 'express';
 import dotenv from "dotenv";
 import bodyParser from 'body-parser';
+import connectDB from "./libs/db";
 
 dotenv.config();
+connectDB();
 
 const app = express();
 app.use(bodyParser.json());
