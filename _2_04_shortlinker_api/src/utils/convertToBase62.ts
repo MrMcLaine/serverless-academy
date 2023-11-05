@@ -1,4 +1,5 @@
-const ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_!$&*';
+import { ALPHABET } from "../constants/other";
+
 const BASE = ALPHABET.length;
 
 export const convertToBase62 = (url: string): string => {
