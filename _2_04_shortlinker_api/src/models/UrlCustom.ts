@@ -14,6 +14,7 @@ const UrlCustomSchema: Schema = new Schema<IUrlCustom>({
     shortUrl: {
         type: String,
         unique: true,
+        sparse: true
     },
 }, {
     timestamps: true
