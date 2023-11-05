@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-interface IJsonEntry {
+export interface IJsonEntry {
     path: string;
     data: any;
 }
